@@ -13,6 +13,7 @@ int main()
     {
         fin >> x;
         suma = x;
+        c = 0;
         while(suma < x*x)
         {
             c++;
@@ -25,6 +26,7 @@ int main()
                 fout << j << " ";
         }
         fout << '\n';
+
     }
     return 0;
 }

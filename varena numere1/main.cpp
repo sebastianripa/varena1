@@ -23,11 +23,15 @@ bool ePrim (int n)
 bool nrAproapePrim (int n)
 {
     int i;
-    for(i = 2; i <= n/2; i++)
+    if(ePrim(n))
+        return false;
+    for(i = 2; i*i <= n; i++)
     {
-        if(ePrim(i) && n%i == 0 && ePrim(n/i))
-            return true;
+        if(n%i == 0)
+            break;
     }
+    if(ePrim(i) && ePrim(n/i) && i != n/i)
+            return true;
     return false;
 }
 

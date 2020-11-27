@@ -2,7 +2,7 @@
 
 using namespace std;
 
-ifstream fin ("cuburi2.in");
+ifstream fin ("cuburi.in");
 ofstream fout ("cuburi2.out");
 
 int v[1000001], vn[1000001];
@@ -32,9 +32,9 @@ int main()
             nr++;
         }
     }
-    for(i = 1; i <= n; i++)
+    /*for(i = 1; i <= n; i++)
     {
         if(nrlm < v[i])
-    }
+    }*/
     return 0;
 }

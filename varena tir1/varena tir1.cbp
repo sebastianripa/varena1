@@ -33,6 +33,8 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="main.cpp" />
+		<Unit filename="tir1.in" />
+		<Unit filename="tir1.out" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

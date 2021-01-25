@@ -6,46 +6,44 @@ using namespace std;
 ifstream fin ("ruleta.in");
 ofstream fout ("ruleta.out");
 
+int v[30001];
+
 int main()
 {
-    int p, i, j;
-    fin >> p;
-    int vn[p], v[p], n = p - 1, nmin = 1;
-
-    fin >> v[0];
-    vn[0] = 0;
-
-    for(i = 1; i < p; i++)
+    int n, i, nr, j = 1, cont, k;
+    bool egalTot = true;
+    fin >> n;
+    cont  = n - 1;
+    fin >> v[1];
+    for(i = 2; i <= n; i++)
     {
         fin >> v[i];
-        vn[i] = 0;
-
-        if ((p - 1) % i != 0)
+        if(v[i-1] != v[i])
+            egalTot = false;
+    }
+    if(egalTot)
+        cout << 1;
+    else
+    {
+        for(i = 2; i <= n/2; i++)
         {
-            vn[i] = 1;
-        }
-        bool nminset = false;
-        for(j = nmin; j <= i; j++)
-        {
-            if(v[i] != v[i - j])
+            if(cont%i == 0)
             {
-                vn[j] = 1;
+                k = i+1;
+                j = 1;
+                while(v[j] == v[k] && j < i)
+                {
+                    k++;
+                    j++;
+                }
+                if(j == i)
+                {
+                    fout << i;
+                    break;
+                }
             }
-            if (vn[j] == 0 && nminset == false)
-            {
-                nmin = j;
-                nminset = true;
-            }
-            if (i == p - 1 && vn[j] == 0)
-            {
-                fout << j;
-                return 0;
-            }
-        }
-        if (nminset == false)
-        {
-            nmin = i + 1;
         }
     }
+
     return 0;
 }

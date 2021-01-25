@@ -1,56 +1,54 @@
-#include <iostream>
 #include <fstream>
-#include <cmath>
 
 using namespace std;
 
 ifstream fin ("numere4.in");
 ofstream fout ("numere4.out");
 
-int main()
+long long prim (long long n)
 {
-    int n, x, i, j, l, prim3 = 0, dp, pp;
-
-    fin >> n;
-    for(i = 0; i < n; i++)
+    long long i;
+    if(n < 2)
+        return false;
+    for(i = 1; i <= n; i++)
     {
-        fin >> x;
-        pp = 1;
-        dp = 0;
-        for(j = 2; j <= x/2; j++)
-        {
-            if(x%j == 0)
-            {
-                // j este divizorul lui x
-                bool ePrim = true;
-                for(l = 2; l <= sqrt(j); l++)
-                {
-                    if(j%l == 0)
-                    {
-                        ePrim = false;
-                        break;
-                    }
-                }
+        if(n%i == 0)
+            return false;
+    }
+    return true;
+}
 
-                if(ePrim)
-                {
-                    if (dp < 3)
-                    {
-                        pp *= j;
-                        dp++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-        if (pp == x && dp == 3)
+long long aproapePrim(int n)
+{
+    int i, j;
+    if(prim(n))
+        return false;
+    for(i = 2; i*i <= n; i++)
+    {
+        if(n%i == 0)
+            break;
+        if(prim(n/i))
+            return false;
+        for(j = 2; j*j <= n; j++)
         {
-            prim3++;
+            if((n/i)%j == 0)
+                break;
+            if(prim(j) && prim(i) && prim(n/(i*j)) && i != j && j != n/(i*j) && i != n/(i*j))
+                return true;
         }
     }
-    fout << prim3;
+}
+
+int main()
+{
+    long long n, x, i, nr3prim = 0;
+    fin >> n;
+    for(i = 1; i <= n; i++)
+    {
+        fin >> x;
+        if(descompNrFactoriPrimi(x) == 3)
+            nr3prim++;
+    }
+    fout << nr3prim;
     return 0;
 }

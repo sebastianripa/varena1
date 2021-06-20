@@ -1,38 +1,44 @@
-#include <fstream>
+#include <iostream>
 
 using namespace std;
 
-ifstream fin ("cub1.in");
-ofstream fout ("cub1.out");
-
-int v[51], vn[51], vm[51], vf[51], v;
+int v[100], vf[11];
 
 int main()
 {
-    int n, x, i, nrc = 0, maxi = 1;
-    fin >> n;
+    int n, i, j, nrs = 0, nrsm = 0, poz, nrc = 0, nrcm = 0;
+    bool unu = false;
+    cin >> n;
     for(i = 1; i <= n; i++)
     {
-        fin >> x;
-        vn[x]++;
-        if(vf[x] == 0)
-        {
+        cin >> v[i];
+        vf[v[i]]++;
+    }
+    for(i = 1; i <= 11; i++)
+    {
+        if(vf[i] != 0)
             nrc++;
-            vf[x] = 1;
+        if(nrcm < vf[i])
+            nrcm = vf[i];
+    }
+    cout << nrcm;
+    for(i = 1; i <= 11; i++)
+    {
+        if(vf[i] == nrcm)
+            cout << i << ' ';
+    }
+    for(i = 2; i <= n; i++)
+    {
+        if(v[i-1] == v[i])
+        {
+            if(nrs == 0)
+                nrs += 2;
+            else
+                nrs++;
         }
-        v[i] = x;
+        else if(v[i-1] != v[i] && !unu)
+            continue;
+
     }
-    fout << nrc << '\n';
-    for(i = 1; i <= n; i++)
-    {
-        if(maxi < vn[i])
-            maxi = vn[i];
-    }
-    for(i = 1; i <= n; i++)
-    {
-        if(maxi == vn[i])
-            fout << i << " ";
-    }
-    fout << '\n';
     return 0;
 }

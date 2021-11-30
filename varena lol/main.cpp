@@ -7,7 +7,7 @@ ofstream fout ("lol.out");
 
 int nrdiv(int n)
 {
-    int i, nrd = 2;
+    long long i, nrd = 2;
     for(i = 2; i <= n/2; i++)
     {
         if(n%i == 0)
@@ -18,17 +18,16 @@ int nrdiv(int n)
 
 int main()
 {
-    int n, x, y, i, nrdimp = 0, nrp = 0, ep;
+    long long n, x, y, i, nrdimp = 0, nrp = 0, ep;
     fin >> n;
     for(i = 1; i <= n; i++)
     {
         fin >> x >> y;
         ep = (x+y)/2;
         fout << ep << '\n';
-        fout << nrdiv(ep) << '\n';
         if(nrdiv(ep)%2 == 1)
             nrdimp++;
-        else if(nrdiv(ep) == 2)
+        else if(nrdiv(ep) == 2 && ep != 0)
             nrp++;
     }
     fout << nrdimp << " " << nrp;

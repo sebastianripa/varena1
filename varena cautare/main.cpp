@@ -2,46 +2,51 @@
 
 using namespace std;
 
-ifstream fin ("ordine.in");
-ofstream fout ("ordine.out");
+ifstream fin ("cautare.in");
+ofstream fout ("cautare.out");
 
-int v[250001], v2[250001];
+char a[1000][1000], b[1000][1000];
 
 int main()
 {
-    long long n, c, i, nr = 1, cn;
-    fin >> n;
+    int n, m, i, j, ci, cj, i1 = 1, j1 = 1, nra = 0;
+    char c;
+    bool gheorghita = true;
+    fin >> n >> m;
+    fin.get(c);
     for(i = 1; i <= n; i++)
-        fin >> v[i];
-    fin >> c;
-    cn = n;
-    if(c == 1)
     {
-        if(n%2 == 0)
-            fout << v[n];
-        else
-            fout << v[n/2+1];
+        for(j = 1; j <= n; j++)
+            fin >> a[i][j];
     }
-    else
+    for(i = 1; i <= m; i++)
     {
-        while(v[1] != 0)
+        for(j = 1; j <= m; j++)
+            fin >> b[i][j];
+    }
+    i = 1;
+    j = 1;
+    for(i = 1; i <= n-m+1; i++)
+    {
+        for(j = 1; j <= n-m+1; j++)
         {
-            if(n%2 == 1)
+            gheorghita = true;
+            i1 = 1;
+            for(ci = i; ci <= i+m-1; ci++)
             {
-                v2[n] = v[n/2+1];
-                n--;
-                v[n/2+1] = 0;
+                j1 = 1;
+                for(cj = j; cj <= j+m-1; cj++)
+                {
+                    if(a[ci][cj] != b[i1][j1])
+                        gheorghita = false;
+                    j1++;
+                }
+                i1++;
             }
-            else
-            {
-                v2[n] = v[n+nr];
-                v[n+nr] = 0;
-                n--;
-                nr++;
-            }
+            if(gheorghita)
+                nra++;
         }
-        for(i = 1; i <= cn; i++)
-            fout << v2[i] << " ";
     }
+    fout << nra;
     return 0;
 }

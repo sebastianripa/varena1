@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fstream>
 
 using namespace std;
@@ -7,14 +8,14 @@ ofstream fout ("miny.out");
 
 int main()
 {
-    int n, x, i;
-    long long p = 1;
+    int n, x, p = 1, i;
     fin >> n;
     for(i = 1; i <= n; i++)
     {
         fin >> x;
         p *= x;
+        p %= 100;
     }
-    fout << (p%100)/10;
+    fout << p/10;
     return 0;
 }

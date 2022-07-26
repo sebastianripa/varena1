@@ -1,74 +1,82 @@
-#include <fstream>
+#include <iostream>
 
 using namespace std;
 
-ifstream fin ("cifre7.in");
-ofstream fout ("cifre7.out");
-
-int v1[10], v2[10], vs[10];
+int v1[10], v2[10], v3[100001];
 
 int main()
 {
-    long long n, x, y, c, nrcs = 0, i, j, k, p, nrm = 0, nr = 0;
-    fin >> p >> n;
-    for(j = 1; j <= n; j++)
+    int c, n, x, y, i, j, cx, cy, nrc = 0, k, nr = 1;
+    cin >> c >> n;
+    if(c == 1)
     {
-        fin >> x >> y;
-        nr = 0;
-        for(i = 0; i <= 9; i++)
+        for(i = 1; i <= n; i++)
         {
-            v1[i] = 0;
-            v2[i] = 0;
-            vs[i] = 0;
-        }
-        while(x)
-        {
-            v1[x%10]++;
-            x /= 10;
-        }
-        while(y)
-        {
-            v2[y%10]++;
-            y /= 10;
-        }
-        for(i = 1; i <= 9; i++)
-        {
-            if(v1[i] > v2[i])
-                vs[i] = v2[i];
-            else if(v1[i] <= v2[i])
-                vs[i] = v1[i];
-        }
-        if(p == 1)
-        {
-            for(i = 1; i <= 9; i++)
+            for(j = 1; j <= 10; j++)
             {
-                if(vs[i] != 0)
+                v1[j] = 0;
+                v2[j] = 0;
+            }
+            cin >> x >> y;
+            cx = x;
+            cy = y;
+            while(cx)
+            {
+                v1[cx%10]++;
+                cx /= 10;
+            }
+            while(cy)
+            {
+                v2[cy%10]++;
+                cy /= 10;
+            }
+            for(j = 1; j <= 9; j++)
+            {
+                if(v1[j] > 0 && v2[j] > 0)
                 {
-                    nrcs++;
+                    nrc++;
                     break;
                 }
             }
         }
-        else
+        cout << nrc;
+    }
+    else
+    {
+        for(i = 1; i <= n; i++)
         {
-            for(i = 9; i >= 0; i--)
+            for(j = 1; j <= 10; j++)
             {
-                if(vs[i] != 0)
+                v1[j] = 0;
+                v2[j] = 0;
+            }
+            cin >> x >> y;
+            cx = x;
+            cy = y;
+            while(cx)
+            {
+                v1[cx%10]++;
+                cx /= 10;
+            }
+            while(cy)
+            {
+                v2[cy%10]++;
+                cy /= 10;
+            }
+            for(j = 9; j >= 1; j--)
+            {
+                if(v1[j] > 0 && v2[j] > 0)
                 {
-                    while(vs[i])
+                    for(k = 1; k <= min(v1[j], v2[j]); k++)
                     {
-                        nr = nr*10 + i;
-                        vs[i]--;
+                        v3[nr] = j;
+                        nr++;
                     }
                 }
             }
-            if(nrm < nr)
-                nrm = nr;
         }
+        for(i = 1; i <= nr; i++)
+            cout << v3[i];
     }
-    if(p == 1)
-        fout << nrcs;
-    else
-        fout << nrm;
     return 0;
 }

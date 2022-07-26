@@ -32,7 +32,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Untitled1" />
 		<Unit filename="main.cpp" />
 		<Unit filename="roata1.in" />
 		<Unit filename="roata1.out" />

@@ -4,37 +4,23 @@ using namespace std;
 
 int main()
 {
-    int n, i, j = 1, nr = 1, r = 1;
-    cin >> n;
-    nr = n;
-    while(nr < 10)
+    int n, x, ogx, i, m;
+    bool ok = false;
+    cin >> n >> ogx;
+    for(i = 1; i <= n; i++)
     {
-        nr = n;
-        for(i = 1; i <= j; i++)
+        cin >> x;
+        if(ogx > x && ogx == 0)
         {
-            cout << nr;
-            nr += n;
+            ok = 1;
+            m = ogx;
         }
-        cout << '\n';
-        j++;
+        else if(ok == 1 && ogx < x)
+            break;
     }
-    nr = 1;
-    while(r < n)
-    {
-        j = 1;
-        nr = 1;
-        while(nr < 10)
-        {
-            nr = r;
-            for(i = 1; i <= j; i++)
-            {
-                cout << nr;
-                nr += n;
-            }
-            j++;
-            cout << '\n';
-        }
-        r++;
-    }
+    if(i == n+1)
+        cout << m;
+    else
+        cout << x;
     return 0;
 }

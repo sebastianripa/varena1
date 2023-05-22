@@ -33,8 +33,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="main.cpp" />
-		<Unit filename="patrate1.in" />
-		<Unit filename="patrate1.out" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

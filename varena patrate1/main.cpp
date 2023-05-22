@@ -1,63 +1,49 @@
-#include <fstream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 ifstream fin ("patrate1.in");
 ofstream fout ("patrate1.out");
 
-char a[1000][1000];
+int S[205][205];
+char m[205][205];
+
+void sumepartiale(int n)
+{
+    int i, j;
+    for(i = 1; i <= n; i++)
+    {
+        for(j = 1; j <= n; j++)
+            S[i][j] = S[i-1][j] + S[i][j-1] - S[i-1][j-1] + (m[i][j] - 48);
+    }
+}
 
 int main()
 {
-    int n, m = 1, i, j, ci, cj, nrp = 0, p1,p2;
-    bool gheorghita = true;
+    int n, i, j, ans = 0, is, js, s, l = 2;
     fin >> n;
     for(i = 1; i <= n; i++)
     {
         for(j = 1; j <= n; j++)
-        {
-            fin >> a[i][j];
-            if(a[i][j] == '0')
-            {
-                gheorghita = false;
-                p1 = i;
-                p2 = j;
-            }
-        }
+            fin >> m[i][j];
     }
-    if(gheorghita)
-        nrp++;
-    while(m < n)
+    sumepartiale(n);
+    ans += S[n][n];
+    while(l <= n)
     {
-        for(i = 1; i <= n-m+1; i++)
+        for(i = l; i <= n; i++)
         {
-            for(j = 1; j <= n-m+1; j++)
+            for(j = l; j <= n; j++)
             {
-                gheorghita = true;
-                if(p1 <= i+m-1 && p1 >= i)
-                {
-                    if(p2 <= j+m-1 && p2 >= j)
-                        continue;
-                }
-                for(ci = i; ci <= i+m-1; ci++)
-                {
-                    for(cj = j; cj <= j+m-1; cj++)
-                    {
-                        if(a[ci][cj] == '0')
-                        {
-                            gheorghita = false;
-                            break;
-                        }
-                    }
-                    if(!gheorghita)
-                        break;
-                }
-                if(gheorghita)
-                    nrp++;
+                is = i - l + 1;
+                js = j - l + 1;
+                s = S[i][j] - S[is - 1][j] - S[i][js - 1] + S[is - 1][js - 1];
+                if(s == l*l)
+                    ans++;
             }
         }
-        m++;
+        l++;
     }
-    fout << nrp;
+    fout << ans;
     return 0;
 }

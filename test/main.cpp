@@ -2,23 +2,13 @@
 
 using namespace std;
 
+char v[2];
+int v1[1222];
+
 int main()
 {
-    int n, x, ogx, i, cx, pc;
-    cin >> n >> x;
-    for(i = 2; i <= n; i++)
-    {
-        ogx = x;
-        cin >> x;
-        cx = x;
-        while(cx)
-        {
-            if(cx < 10)
-                pc = cx;
-            cx /= 10;
-        }
-        if(pc == ogx%10)
-            cout << ogx << ' ' << x << '\n';
-    }
+    cin >> v[1];
+    v1[v[1]] = 1;
+    cout << v1[v[1]];
     return 0;
 }
